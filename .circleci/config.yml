@@ -43,6 +43,15 @@ jobs:
       - store_artifacts:
           path: ~/junit
       - run:
+          name: Update NODE -> Step - CLEAN NPM
+          command: sudo npm cache clean -f
+      - run:
+          name: Update NODE -> Step - INSTALL GLOBAL
+          command: sudo npm install -g n
+      - run:
+          name: Update NODE -> Step - VerSION STABLE
+          command: sudo n stable
+      - run:
           name: install yarn
           command: sudo npm install -g yarn
       - run:
