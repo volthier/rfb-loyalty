@@ -47,4 +47,4 @@ jobs:
           command: sudo npm install -g yarn
       - run:
           name: Build Docker Image
-          command: ./gradlew bootRepackage -Pprod buildDocker
+          command: ./gradlew bootWar -Pprod buildDocker
