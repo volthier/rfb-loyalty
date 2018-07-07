@@ -40,6 +40,12 @@ public class CacheConfiguration {
             cm.createCache(com.rfb.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.rfb.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.rfb.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbLocation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbLocation.class.getName() + ".rfbEvents", jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbEvent.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbEvent.class.getName() + ".rfbEvAtts", jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbEvAtt.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbUser.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

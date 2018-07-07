@@ -1,0 +1,34 @@
+{
+    "name": "RfbEvAtt",
+    "fields": [
+        {
+            "fieldName": "attendanceDay",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "rfbEvent",
+            "otherEntityName": "rfbEvent",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "rfbUser",
+            "otherEntityName": "rfbUser",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "rfbEvAtt"
+        }
+    ],
+    "changelogDate": "20180707212836",
+    "entityTableName": "rfb_ev_att",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
