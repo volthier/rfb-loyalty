@@ -26,7 +26,9 @@ public class RfbEventCodeService {
         this.rfbLocationRepository = rfbLocationRepository;
     }
 
-    @Scheduled(cron = "* * * * * ?")
+    //@Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 * * * * ?")
+//    @Scheduled(cron = "* * * * * ?")
     public void generateRunEventCodes() {
         log.debug("Gerando os Eventos.....!!!!");
 

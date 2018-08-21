@@ -4,6 +4,8 @@ import com.rfb.domain.RfbLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data  repository for the RfbLocation entity.
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RfbLocationRepository extends JpaRepository<RfbLocation, Long> {
 
-    findAllByRunDayOfWeek
+    List<RfbLocation> findAllByRunDayOfWeek(Integer dayOfWeek);
+
+    RfbLocation findAllByLocationName(String name);
 
 }
