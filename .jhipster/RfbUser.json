@@ -1,0 +1,34 @@
+{
+    "name": "RfbUser",
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "homeLocation",
+            "otherEntityName": "rfbLocation",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "rfbUser"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "rfbEventAttendance",
+            "otherEntityName": "rfbEventAttendance",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180821170141",
+    "entityTableName": "rfb_user",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

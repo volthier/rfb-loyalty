@@ -1,0 +1,19 @@
+{
+    "name": "RfbEventAttendance",
+    "fields": [
+        {
+            "fieldName": "attendanceDay",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180821170140",
+    "entityTableName": "rfb_event_attendance",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
