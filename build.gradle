@@ -240,3 +240,22 @@ if (project.hasProperty('nodeInstall')) {
 compileJava.dependsOn processResources
 processResources.dependsOn cleanResources,bootBuildInfo
 bootBuildInfo.mustRunAfter cleanResources
+
+def generatedSources = "$buildDir/generated"
+def generatedOutputDir = file("$generatedSources")
+
+compileJava{
+    doFirst {
+        generatedOutputDir.exists() || generatedOutputDir.mkdirs()
+        options.compilerArgs = [
+                '-s', "${generatedSources}"
+        ]
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        sourceDirs += generatedOutputDir
+    }
+}
