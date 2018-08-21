@@ -8,18 +8,16 @@
     ],
     "relationships": [
         {
-            "relationshipName": "rfbEvent",
-            "otherEntityName": "rfbEvent",
             "relationshipType": "many-to-one",
+            "relationshipName": "rfbUser",
+            "otherEntityName": "rfbUser",
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "rfbUser",
-            "otherEntityName": "rfbUser",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "rfbEvAtt"
+            "relationshipType": "many-to-one",
+            "relationshipName": "rfbEvent",
+            "otherEntityName": "rfbEvent",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20180707212836",

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {JhiAlertService} from 'ng-jhipster';
 
-import { IRfbEvAtt } from 'app/shared/model/rfb-ev-att.model';
-import { RfbEvAttService } from './rfb-ev-att.service';
-import { IRfbEvent } from 'app/shared/model/rfb-event.model';
-import { RfbEventService } from 'app/entities/rfb-event';
-import { IRfbUser } from 'app/shared/model/rfb-user.model';
-import { RfbUserService } from 'app/entities/rfb-user';
+import {IRfbEvAtt} from 'app/shared/model/rfb-ev-att.model';
+import {RfbEvAttService} from './rfb-ev-att.service';
+import {IRfbUser} from 'app/shared/model/rfb-user.model';
+import {RfbUserService} from 'app/entities/rfb-user';
+import {IRfbEvent} from 'app/shared/model/rfb-event.model';
+import {RfbEventService} from 'app/entities/rfb-event';
 
 @Component({
     selector: 'jhi-rfb-ev-att-update',
@@ -19,16 +19,16 @@ export class RfbEvAttUpdateComponent implements OnInit {
     private _rfbEvAtt: IRfbEvAtt;
     isSaving: boolean;
 
-    rfbevents: IRfbEvent[];
-
     rfbusers: IRfbUser[];
+
+    rfbevents: IRfbEvent[];
     attendanceDayDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private rfbEvAttService: RfbEvAttService,
-        private rfbEventService: RfbEventService,
         private rfbUserService: RfbUserService,
+        private rfbEventService: RfbEventService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,24 +37,15 @@ export class RfbEvAttUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ rfbEvAtt }) => {
             this.rfbEvAtt = rfbEvAtt;
         });
-        this.rfbEventService.query().subscribe(
-            (res: HttpResponse<IRfbEvent[]>) => {
-                this.rfbevents = res.body;
+        this.rfbUserService.query().subscribe(
+            (res: HttpResponse<IRfbUser[]>) => {
+                this.rfbusers = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.rfbUserService.query({ filter: 'rfbevatt-is-null' }).subscribe(
-            (res: HttpResponse<IRfbUser[]>) => {
-                if (!this.rfbEvAtt.rfbUserId) {
-                    this.rfbusers = res.body;
-                } else {
-                    this.rfbUserService.find(this.rfbEvAtt.rfbUserId).subscribe(
-                        (subRes: HttpResponse<IRfbUser>) => {
-                            this.rfbusers = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+        this.rfbEventService.query().subscribe(
+            (res: HttpResponse<IRfbEvent[]>) => {
+                this.rfbevents = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -90,11 +81,11 @@ export class RfbEvAttUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackRfbEventById(index: number, item: IRfbEvent) {
+    trackRfbUserById(index: number, item: IRfbUser) {
         return item.id;
     }
 
-    trackRfbUserById(index: number, item: IRfbUser) {
+    trackRfbEventById(index: number, item: IRfbEvent) {
         return item.id;
     }
     get rfbEvAtt() {

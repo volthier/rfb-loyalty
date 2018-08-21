@@ -12,16 +12,16 @@
     ],
     "relationships": [
         {
-            "relationshipName": "rfbLocation",
-            "otherEntityName": "rfbLocation",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "rfbEvAtt",
             "otherEntityName": "rfbEvAtt",
             "otherEntityRelationshipName": "rfbEvent"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "rfbLocation",
+            "otherEntityName": "rfbLocation",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20180707212835",

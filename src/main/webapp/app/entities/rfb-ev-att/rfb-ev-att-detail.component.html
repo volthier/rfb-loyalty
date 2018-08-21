@@ -9,16 +9,16 @@
                 <dd>
                     <span>{{rfbEvAtt.attendanceDay}}</span>
                 </dd>
-                <dt><span>Rfb Event</span></dt>
-                <dd>
-                    <div *ngIf="rfbEvAtt.rfbEventId">
-                        <a [routerLink]="['/rfb-event', rfbEvAtt.rfbEventId, 'view']">{{rfbEvAtt.rfbEventId}}</a>
-                    </div>
-                </dd>
                 <dt><span>Rfb User</span></dt>
                 <dd>
                     <div *ngIf="rfbEvAtt.rfbUserId">
                         <a [routerLink]="['/rfb-user', rfbEvAtt.rfbUserId, 'view']">{{rfbEvAtt.rfbUserId}}</a>
+                    </div>
+                </dd>
+                <dt><span>Rfb Event</span></dt>
+                <dd>
+                    <div *ngIf="rfbEvAtt.rfbEventId">
+                        <a [routerLink]="['/rfb-event', rfbEvAtt.rfbEventId, 'view']">{{rfbEvAtt.rfbEventId}}</a>
                     </div>
                 </dd>
             </dl>

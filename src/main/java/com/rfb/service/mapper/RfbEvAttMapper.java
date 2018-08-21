@@ -1,22 +1,22 @@
 package com.rfb.service.mapper;
 
-import com.rfb.domain.*;
+import com.rfb.domain.RfbEvAtt;
 import com.rfb.service.dto.RfbEvAttDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity RfbEvAtt and its DTO RfbEvAttDTO.
  */
-@Mapper(componentModel = "spring", uses = {RfbEventMapper.class, RfbUserMapper.class})
+@Mapper(componentModel = "spring", uses = {RfbUserMapper.class, RfbEventMapper.class})
 public interface RfbEvAttMapper extends EntityMapper<RfbEvAttDTO, RfbEvAtt> {
 
-    @Mapping(source = "rfbEvent.id", target = "rfbEventId")
     @Mapping(source = "rfbUser.id", target = "rfbUserId")
+    @Mapping(source = "rfbEvent.id", target = "rfbEventId")
     RfbEvAttDTO toDto(RfbEvAtt rfbEvAtt);
 
-    @Mapping(source = "rfbEventId", target = "rfbEvent")
     @Mapping(source = "rfbUserId", target = "rfbUser")
+    @Mapping(source = "rfbEventId", target = "rfbEvent")
     RfbEvAtt toEntity(RfbEvAttDTO rfbEvAttDTO);
 
     default RfbEvAtt fromId(Long id) {

@@ -16,8 +16,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="attendanceDay"><span>Attendance Day</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rfbEventId"><span>Rfb Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="rfbUserId"><span>Rfb User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rfbEventId"><span>Rfb Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -26,13 +26,13 @@
                 <td><a [routerLink]="['/rfb-ev-att', rfbEvAtt.id, 'view' ]">{{rfbEvAtt.id}}</a></td>
                 <td>{{rfbEvAtt.attendanceDay | date:'mediumDate'}}</td>
                 <td>
-                    <div *ngIf="rfbEvAtt.rfbEventId">
-                        <a [routerLink]="['../rfb-event', rfbEvAtt.rfbEventId , 'view' ]" >{{rfbEvAtt.rfbEventId}}</a>
+                    <div *ngIf="rfbEvAtt.rfbUserId">
+                        <a [routerLink]="['../rfb-user', rfbEvAtt.rfbUserId , 'view' ]" >{{rfbEvAtt.rfbUserId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="rfbEvAtt.rfbUserId">
-                        <a [routerLink]="['../rfb-user', rfbEvAtt.rfbUserId , 'view' ]" >{{rfbEvAtt.rfbUserId}}</a>
+                    <div *ngIf="rfbEvAtt.rfbEventId">
+                        <a [routerLink]="['../rfb-event', rfbEvAtt.rfbEventId , 'view' ]" >{{rfbEvAtt.rfbEventId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

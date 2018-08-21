@@ -1,7 +1,7 @@
 package com.rfb.service.dto;
 
-import java.time.LocalDate;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -13,9 +13,9 @@ public class RfbEvAttDTO implements Serializable {
 
     private LocalDate attendanceDay;
 
-    private Long rfbEventId;
-
     private Long rfbUserId;
+
+    private Long rfbEventId;
 
     public Long getId() {
         return id;
@@ -33,20 +33,20 @@ public class RfbEvAttDTO implements Serializable {
         this.attendanceDay = attendanceDay;
     }
 
-    public Long getRfbEventId() {
-        return rfbEventId;
-    }
-
-    public void setRfbEventId(Long rfbEventId) {
-        this.rfbEventId = rfbEventId;
-    }
-
     public Long getRfbUserId() {
         return rfbUserId;
     }
 
     public void setRfbUserId(Long rfbUserId) {
         this.rfbUserId = rfbUserId;
+    }
+
+    public Long getRfbEventId() {
+        return rfbEventId;
+    }
+
+    public void setRfbEventId(Long rfbEventId) {
+        this.rfbEventId = rfbEventId;
     }
 
     @Override
@@ -75,8 +75,8 @@ public class RfbEvAttDTO implements Serializable {
         return "RfbEvAttDTO{" +
             "id=" + getId() +
             ", attendanceDay='" + getAttendanceDay() + "'" +
-            ", rfbEvent=" + getRfbEventId() +
             ", rfbUser=" + getRfbUserId() +
+            ", rfbEvent=" + getRfbEventId() +
             "}";
     }
 }

@@ -1,12 +1,12 @@
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 
 export interface IRfbEvAtt {
     id?: number;
     attendanceDay?: Moment;
-    rfbEventId?: number;
     rfbUserId?: number;
+    rfbEventId?: number;
 }
 
 export class RfbEvAtt implements IRfbEvAtt {
-    constructor(public id?: number, public attendanceDay?: Moment, public rfbEventId?: number, public rfbUserId?: number) {}
+    constructor(public id?: number, public attendanceDay?: Moment, public rfbUserId?: number, public rfbEventId?: number) {}
 }

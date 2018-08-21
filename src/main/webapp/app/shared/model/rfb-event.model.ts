@@ -1,12 +1,12 @@
-import { Moment } from 'moment';
-import { IRfbEvAtt } from 'app/shared/model//rfb-ev-att.model';
+import {Moment} from 'moment';
+import {IRfbEvAtt} from 'app/shared/model//rfb-ev-att.model';
 
 export interface IRfbEvent {
     id?: number;
     eventDate?: Moment;
     eventCode?: string;
-    rfbLocationId?: number;
     rfbEvAtts?: IRfbEvAtt[];
+    rfbLocationId?: number;
 }
 
 export class RfbEvent implements IRfbEvent {
@@ -14,7 +14,7 @@ export class RfbEvent implements IRfbEvent {
         public id?: number,
         public eventDate?: Moment,
         public eventCode?: string,
-        public rfbLocationId?: number,
-        public rfbEvAtts?: IRfbEvAtt[]
+        public rfbEvAtts?: IRfbEvAtt[],
+        public rfbLocationId?: number
     ) {}
 }

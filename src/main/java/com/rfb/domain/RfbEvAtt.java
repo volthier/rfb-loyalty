@@ -5,7 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -30,11 +29,11 @@ public class RfbEvAtt implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("rfbEvAtts")
-    private RfbEvent rfbEvent;
-
-    @OneToOne
-    @JoinColumn(unique = true)
     private RfbUser rfbUser;
+
+    @ManyToOne
+    @JsonIgnoreProperties("rfbEvAtts")
+    private RfbEvent rfbEvent;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,19 +57,6 @@ public class RfbEvAtt implements Serializable {
         this.attendanceDay = attendanceDay;
     }
 
-    public RfbEvent getRfbEvent() {
-        return rfbEvent;
-    }
-
-    public RfbEvAtt rfbEvent(RfbEvent rfbEvent) {
-        this.rfbEvent = rfbEvent;
-        return this;
-    }
-
-    public void setRfbEvent(RfbEvent rfbEvent) {
-        this.rfbEvent = rfbEvent;
-    }
-
     public RfbUser getRfbUser() {
         return rfbUser;
     }
@@ -82,6 +68,19 @@ public class RfbEvAtt implements Serializable {
 
     public void setRfbUser(RfbUser rfbUser) {
         this.rfbUser = rfbUser;
+    }
+
+    public RfbEvent getRfbEvent() {
+        return rfbEvent;
+    }
+
+    public RfbEvAtt rfbEvent(RfbEvent rfbEvent) {
+        this.rfbEvent = rfbEvent;
+        return this;
+    }
+
+    public void setRfbEvent(RfbEvent rfbEvent) {
+        this.rfbEvent = rfbEvent;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

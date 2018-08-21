@@ -4,9 +4,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A RfbUser.
@@ -29,6 +30,10 @@ public class RfbUser implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private RfbLocation rfbLocation;
+
+    @OneToMany(mappedBy = "rfbUser")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RfbEvAtt> rfbEvAtts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -63,6 +68,31 @@ public class RfbUser implements Serializable {
 
     public void setRfbLocation(RfbLocation rfbLocation) {
         this.rfbLocation = rfbLocation;
+    }
+
+    public Set<RfbEvAtt> getRfbEvAtts() {
+        return rfbEvAtts;
+    }
+
+    public RfbUser rfbEvAtts(Set<RfbEvAtt> rfbEvAtts) {
+        this.rfbEvAtts = rfbEvAtts;
+        return this;
+    }
+
+    public RfbUser addRfbEvAtt(RfbEvAtt rfbEvAtt) {
+        this.rfbEvAtts.add(rfbEvAtt);
+        rfbEvAtt.setRfbUser(this);
+        return this;
+    }
+
+    public RfbUser removeRfbEvAtt(RfbEvAtt rfbEvAtt) {
+        this.rfbEvAtts.remove(rfbEvAtt);
+        rfbEvAtt.setRfbUser(null);
+        return this;
+    }
+
+    public void setRfbEvAtts(Set<RfbEvAtt> rfbEvAtts) {
+        this.rfbEvAtts = rfbEvAtts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
