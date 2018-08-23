@@ -1,22 +1,21 @@
 package com.rfb.service.mapper;
 
-import com.rfb.domain.*;
+import com.rfb.domain.RfbUser;
 import com.rfb.service.dto.RfbUserDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity RfbUser and its DTO RfbUserDTO.
  */
-@Mapper(componentModel = "spring", uses = {RfbLocationMapper.class, RfbEventAttendanceMapper.class})
+@Mapper(componentModel = "spring", uses = {RfbLocationMapper.class})
 public interface RfbUserMapper extends EntityMapper<RfbUserDTO, RfbUser> {
 
-    @Mapping(source = "homeLocation.id", target = "homeLocationId")
-    @Mapping(source = "rfbEventAttendance.id", target = "rfbEventAttendanceId")
+    @Mapping(source = "rfbLocation.id", target = "rfbLocationId")
     RfbUserDTO toDto(RfbUser rfbUser);
 
-    @Mapping(source = "homeLocationId", target = "homeLocation")
-    @Mapping(source = "rfbEventAttendanceId", target = "rfbEventAttendance")
+    @Mapping(source = "rfbLocationId", target = "rfbLocation")
+    @Mapping(target = "rfbEvAtts", ignore = true)
     RfbUser toEntity(RfbUserDTO rfbUserDTO);
 
     default RfbUser fromId(Long id) {

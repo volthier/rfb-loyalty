@@ -1,12 +1,14 @@
 package com.rfb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -30,9 +32,9 @@ public class RfbLocation implements Serializable {
     @Column(name = "run_day_of_week")
     private Integer runDayOfWeek;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private RfbEvent rvbEvent;
+    @OneToMany(mappedBy = "rfbLocation")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RfbEvent> rfbEvents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -69,17 +71,29 @@ public class RfbLocation implements Serializable {
         this.runDayOfWeek = runDayOfWeek;
     }
 
-    public RfbEvent getRvbEvent() {
-        return rvbEvent;
+    public Set<RfbEvent> getRfbEvents() {
+        return rfbEvents;
     }
 
-    public RfbLocation rvbEvent(RfbEvent rfbEvent) {
-        this.rvbEvent = rfbEvent;
+    public RfbLocation rfbEvents(Set<RfbEvent> rfbEvents) {
+        this.rfbEvents = rfbEvents;
         return this;
     }
 
-    public void setRvbEvent(RfbEvent rfbEvent) {
-        this.rvbEvent = rfbEvent;
+    public RfbLocation addRfbEvent(RfbEvent rfbEvent) {
+        this.rfbEvents.add(rfbEvent);
+        rfbEvent.setRfbLocation(this);
+        return this;
+    }
+
+    public RfbLocation removeRfbEvent(RfbEvent rfbEvent) {
+        this.rfbEvents.remove(rfbEvent);
+        rfbEvent.setRfbLocation(null);
+        return this;
+    }
+
+    public void setRfbEvents(Set<RfbEvent> rfbEvents) {
+        this.rfbEvents = rfbEvents;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

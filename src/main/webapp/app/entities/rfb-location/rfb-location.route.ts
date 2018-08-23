@@ -3,8 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { RfbLocation } from 'app/shared/model/rfb-location.model';
 import { RfbLocationService } from './rfb-location.service';
 import { RfbLocationComponent } from './rfb-location.component';
@@ -20,9 +19,9 @@ export class RfbLocationResolve implements Resolve<IRfbLocation> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((rfbLocation: HttpResponse<RfbLocation>) => rfbLocation.body));
+            return this.service.find(id).map((rfbLocation: HttpResponse<RfbLocation>) => rfbLocation.body);
         }
-        return of(new RfbLocation());
+        return Observable.of(new RfbLocation());
     }
 }
 

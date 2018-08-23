@@ -1,16 +1,17 @@
 package com.rfb.config;
 
-import java.time.Duration;
-
-import org.ehcache.config.builders.*;
-import org.ehcache.jsr107.Eh107Configuration;
-
-import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
 import io.github.jhipster.config.JHipsterProperties;
-
+import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ExpiryPolicyBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
+import org.ehcache.jsr107.Eh107Configuration;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
 
 @Configuration
 @EnableCaching
@@ -41,9 +42,12 @@ public class CacheConfiguration {
             cm.createCache(com.rfb.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.rfb.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             cm.createCache(com.rfb.domain.RfbLocation.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbLocation.class.getName() + ".rfbEvents", jcacheConfiguration);
             cm.createCache(com.rfb.domain.RfbEvent.class.getName(), jcacheConfiguration);
-            cm.createCache(com.rfb.domain.RfbEventAttendance.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbEvent.class.getName() + ".rfbEvAtts", jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbEvAtt.class.getName(), jcacheConfiguration);
             cm.createCache(com.rfb.domain.RfbUser.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rfb.domain.RfbUser.class.getName() + ".rfbEvAtts", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

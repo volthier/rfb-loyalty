@@ -9,16 +9,10 @@
                 <dd>
                     <span>{{rfbUser.userName}}</span>
                 </dd>
-                <dt><span>Home Location</span></dt>
+                <dt><span>Rfb Location</span></dt>
                 <dd>
-                    <div *ngIf="rfbUser.homeLocationId">
-                        <a [routerLink]="['/rfb-location', rfbUser.homeLocationId, 'view']">{{rfbUser.homeLocationId}}</a>
-                    </div>
-                </dd>
-                <dt><span>Rfb Event Attendance</span></dt>
-                <dd>
-                    <div *ngIf="rfbUser.rfbEventAttendanceId">
-                        <a [routerLink]="['/rfb-event-attendance', rfbUser.rfbEventAttendanceId, 'view']">{{rfbUser.rfbEventAttendanceId}}</a>
+                    <div *ngIf="rfbUser.rfbLocationId">
+                        <a [routerLink]="['/rfb-location', rfbUser.rfbLocationId, 'view']">{{rfbUser.rfbLocationId}}</a>
                     </div>
                 </dd>
             </dl>

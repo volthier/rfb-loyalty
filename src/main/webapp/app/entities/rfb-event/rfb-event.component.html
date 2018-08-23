@@ -17,7 +17,7 @@
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventDate"><span>Event Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventCode"><span>Event Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rfbEventAttendanceId"><span>Rfb Event Attendance</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rfbLocationId"><span>Rfb Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,8 +27,8 @@
                 <td>{{rfbEvent.eventDate | date:'mediumDate'}}</td>
                 <td>{{rfbEvent.eventCode}}</td>
                 <td>
-                    <div *ngIf="rfbEvent.rfbEventAttendanceId">
-                        <a [routerLink]="['../rfb-event-attendance', rfbEvent.rfbEventAttendanceId , 'view' ]" >{{rfbEvent.rfbEventAttendanceId}}</a>
+                    <div *ngIf="rfbEvent.rfbLocationId">
+                        <a [routerLink]="['../rfb-location', rfbEvent.rfbLocationId , 'view' ]" >{{rfbEvent.rfbLocationId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

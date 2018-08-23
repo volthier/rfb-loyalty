@@ -14,8 +14,6 @@ public class RfbLocationDTO implements Serializable {
 
     private Integer runDayOfWeek;
 
-    private Long rvbEventId;
-
     public Long getId() {
         return id;
     }
@@ -38,14 +36,6 @@ public class RfbLocationDTO implements Serializable {
 
     public void setRunDayOfWeek(Integer runDayOfWeek) {
         this.runDayOfWeek = runDayOfWeek;
-    }
-
-    public Long getRvbEventId() {
-        return rvbEventId;
-    }
-
-    public void setRvbEventId(Long rfbEventId) {
-        this.rvbEventId = rfbEventId;
     }
 
     @Override
@@ -75,7 +65,6 @@ public class RfbLocationDTO implements Serializable {
             "id=" + getId() +
             ", locationName='" + getLocationName() + "'" +
             ", runDayOfWeek=" + getRunDayOfWeek() +
-            ", rvbEvent=" + getRvbEventId() +
             "}";
     }
 }

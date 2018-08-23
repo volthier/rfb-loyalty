@@ -5,10 +5,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A RfbEvent.
@@ -31,9 +32,13 @@ public class RfbEvent implements Serializable {
     @Column(name = "event_code")
     private String eventCode;
 
+    @OneToMany(mappedBy = "rfbEvent")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RfbEvAtt> rfbEvAtts = new HashSet<>();
+
     @ManyToOne
-    @JsonIgnoreProperties("")
-    private RfbEventAttendance rfbEventAttendance;
+    @JsonIgnoreProperties("rfbEvents")
+    private RfbLocation rfbLocation;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -70,17 +75,42 @@ public class RfbEvent implements Serializable {
         this.eventCode = eventCode;
     }
 
-    public RfbEventAttendance getRfbEventAttendance() {
-        return rfbEventAttendance;
+    public Set<RfbEvAtt> getRfbEvAtts() {
+        return rfbEvAtts;
     }
 
-    public RfbEvent rfbEventAttendance(RfbEventAttendance rfbEventAttendance) {
-        this.rfbEventAttendance = rfbEventAttendance;
+    public RfbEvent rfbEvAtts(Set<RfbEvAtt> rfbEvAtts) {
+        this.rfbEvAtts = rfbEvAtts;
         return this;
     }
 
-    public void setRfbEventAttendance(RfbEventAttendance rfbEventAttendance) {
-        this.rfbEventAttendance = rfbEventAttendance;
+    public RfbEvent addRfbEvAtt(RfbEvAtt rfbEvAtt) {
+        this.rfbEvAtts.add(rfbEvAtt);
+        rfbEvAtt.setRfbEvent(this);
+        return this;
+    }
+
+    public RfbEvent removeRfbEvAtt(RfbEvAtt rfbEvAtt) {
+        this.rfbEvAtts.remove(rfbEvAtt);
+        rfbEvAtt.setRfbEvent(null);
+        return this;
+    }
+
+    public void setRfbEvAtts(Set<RfbEvAtt> rfbEvAtts) {
+        this.rfbEvAtts = rfbEvAtts;
+    }
+
+    public RfbLocation getRfbLocation() {
+        return rfbLocation;
+    }
+
+    public RfbEvent rfbLocation(RfbLocation rfbLocation) {
+        this.rfbLocation = rfbLocation;
+        return this;
+    }
+
+    public void setRfbLocation(RfbLocation rfbLocation) {
+        this.rfbLocation = rfbLocation;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -8,13 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity RfbLocation and its DTO RfbLocationDTO.
  */
-@Mapper(componentModel = "spring", uses = {RfbEventMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface RfbLocationMapper extends EntityMapper<RfbLocationDTO, RfbLocation> {
 
-    @Mapping(source = "rvbEvent.id", target = "rvbEventId")
-    RfbLocationDTO toDto(RfbLocation rfbLocation);
 
-    @Mapping(source = "rvbEventId", target = "rvbEvent")
+    @Mapping(target = "rfbEvents", ignore = true)
     RfbLocation toEntity(RfbLocationDTO rfbLocationDTO);
 
     default RfbLocation fromId(Long id) {

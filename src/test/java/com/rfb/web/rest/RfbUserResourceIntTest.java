@@ -211,7 +211,7 @@ public class RfbUserResourceIntTest {
         // Create the RfbUser
         RfbUserDTO rfbUserDTO = rfbUserMapper.toDto(rfbUser);
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException 
+        // If the entity doesn't have an ID, it will be created instead of just being updated
         restRfbUserMockMvc.perform(put("/api/rfb-users")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(rfbUserDTO)))

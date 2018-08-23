@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { RfbUser } from 'app/shared/model/rfb-user.model';
 import { RfbUserService } from './rfb-user.service';
 import { RfbUserComponent } from './rfb-user.component';
@@ -19,9 +18,9 @@ export class RfbUserResolve implements Resolve<IRfbUser> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((rfbUser: HttpResponse<RfbUser>) => rfbUser.body));
+            return this.service.find(id).map((rfbUser: HttpResponse<RfbUser>) => rfbUser.body);
         }
-        return of(new RfbUser());
+        return Observable.of(new RfbUser());
     }
 }
 

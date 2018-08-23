@@ -220,7 +220,7 @@ public class RfbLocationResourceIntTest {
         // Create the RfbLocation
         RfbLocationDTO rfbLocationDTO = rfbLocationMapper.toDto(rfbLocation);
 
-        // If the entity doesn't have an ID, it will throw BadRequestAlertException 
+        // If the entity doesn't have an ID, it will be created instead of just being updated
         restRfbLocationMockMvc.perform(put("/api/rfb-locations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(rfbLocationDTO)))

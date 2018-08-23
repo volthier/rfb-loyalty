@@ -12,13 +12,13 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "rvbEvent",
+            "relationshipType": "one-to-many",
+            "relationshipName": "rfbEvent",
             "otherEntityName": "rfbEvent",
-            "otherEntityField": "id"
+            "otherEntityRelationshipName": "rfbLocation"
         }
     ],
-    "changelogDate": "20180821170138",
+    "changelogDate": "20180707212834",
     "entityTableName": "rfb_location",
     "dto": "mapstruct",
     "pagination": "pagination",

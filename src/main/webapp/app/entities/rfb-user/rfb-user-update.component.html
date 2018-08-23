@@ -16,17 +16,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_homeLocation">Home Location</label>
-                    <select class="form-control" id="field_homeLocation" name="homeLocation" [(ngModel)]="rfbUser.homeLocationId">
+                    <label class="form-control-label" for="field_rfbLocation">Rfb Location</label>
+                    <select class="form-control" id="field_rfbLocation" name="rfbLocation" [(ngModel)]="rfbUser.rfbLocationId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="rfbLocationOption.id" *ngFor="let rfbLocationOption of homelocations; trackBy: trackRfbLocationById">{{rfbLocationOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_rfbEventAttendance">Rfb Event Attendance</label>
-                    <select class="form-control" id="field_rfbEventAttendance" name="rfbEventAttendance" [(ngModel)]="rfbUser.rfbEventAttendanceId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rfbEventAttendanceOption.id" *ngFor="let rfbEventAttendanceOption of rfbeventattendances; trackBy: trackRfbEventAttendanceById">{{rfbEventAttendanceOption.id}}</option>
+                        <option [ngValue]="rfbLocationOption.id" *ngFor="let rfbLocationOption of rfblocations; trackBy: trackRfbLocationById">{{rfbLocationOption.id}}</option>
                     </select>
                 </div>
             </div>

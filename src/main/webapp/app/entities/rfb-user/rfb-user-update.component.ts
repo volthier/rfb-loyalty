@@ -8,8 +8,6 @@ import { IRfbUser } from 'app/shared/model/rfb-user.model';
 import { RfbUserService } from './rfb-user.service';
 import { IRfbLocation } from 'app/shared/model/rfb-location.model';
 import { RfbLocationService } from 'app/entities/rfb-location';
-import { IRfbEventAttendance } from 'app/shared/model/rfb-event-attendance.model';
-import { RfbEventAttendanceService } from 'app/entities/rfb-event-attendance';
 
 @Component({
     selector: 'jhi-rfb-user-update',
@@ -19,15 +17,12 @@ export class RfbUserUpdateComponent implements OnInit {
     private _rfbUser: IRfbUser;
     isSaving: boolean;
 
-    homelocations: IRfbLocation[];
-
-    rfbeventattendances: IRfbEventAttendance[];
+    rfblocations: IRfbLocation[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private rfbUserService: RfbUserService,
         private rfbLocationService: RfbLocationService,
-        private rfbEventAttendanceService: RfbEventAttendanceService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -38,22 +33,16 @@ export class RfbUserUpdateComponent implements OnInit {
         });
         this.rfbLocationService.query({ filter: 'rfbuser-is-null' }).subscribe(
             (res: HttpResponse<IRfbLocation[]>) => {
-                if (!this.rfbUser.homeLocationId) {
-                    this.homelocations = res.body;
+                if (!this.rfbUser.rfbLocationId) {
+                    this.rfblocations = res.body;
                 } else {
-                    this.rfbLocationService.find(this.rfbUser.homeLocationId).subscribe(
+                    this.rfbLocationService.find(this.rfbUser.rfbLocationId).subscribe(
                         (subRes: HttpResponse<IRfbLocation>) => {
-                            this.homelocations = [subRes.body].concat(res.body);
+                            this.rfblocations = [subRes.body].concat(res.body);
                         },
                         (subRes: HttpErrorResponse) => this.onError(subRes.message)
                     );
                 }
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.rfbEventAttendanceService.query().subscribe(
-            (res: HttpResponse<IRfbEventAttendance[]>) => {
-                this.rfbeventattendances = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -90,10 +79,6 @@ export class RfbUserUpdateComponent implements OnInit {
     }
 
     trackRfbLocationById(index: number, item: IRfbLocation) {
-        return item.id;
-    }
-
-    trackRfbEventAttendanceById(index: number, item: IRfbEventAttendance) {
         return item.id;
     }
     get rfbUser() {

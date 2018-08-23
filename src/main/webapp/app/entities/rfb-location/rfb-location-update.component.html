@@ -20,13 +20,6 @@
                         [(ngModel)]="rfbLocation.runDayOfWeek" />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_rvbEvent">Rvb Event</label>
-                    <select class="form-control" id="field_rvbEvent" name="rvbEvent" [(ngModel)]="rfbLocation.rvbEventId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rfbEventOption.id" *ngFor="let rfbEventOption of rfbevents; trackBy: trackRfbEventById">{{rfbEventOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

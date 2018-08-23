@@ -12,9 +12,7 @@ public class RfbUserDTO implements Serializable {
 
     private String userName;
 
-    private Long homeLocationId;
-
-    private Long rfbEventAttendanceId;
+    private Long rfbLocationId;
 
     public Long getId() {
         return id;
@@ -32,20 +30,12 @@ public class RfbUserDTO implements Serializable {
         this.userName = userName;
     }
 
-    public Long getHomeLocationId() {
-        return homeLocationId;
+    public Long getRfbLocationId() {
+        return rfbLocationId;
     }
 
-    public void setHomeLocationId(Long rfbLocationId) {
-        this.homeLocationId = rfbLocationId;
-    }
-
-    public Long getRfbEventAttendanceId() {
-        return rfbEventAttendanceId;
-    }
-
-    public void setRfbEventAttendanceId(Long rfbEventAttendanceId) {
-        this.rfbEventAttendanceId = rfbEventAttendanceId;
+    public void setRfbLocationId(Long rfbLocationId) {
+        this.rfbLocationId = rfbLocationId;
     }
 
     @Override
@@ -74,8 +64,7 @@ public class RfbUserDTO implements Serializable {
         return "RfbUserDTO{" +
             "id=" + getId() +
             ", userName='" + getUserName() + "'" +
-            ", homeLocation=" + getHomeLocationId() +
-            ", rfbEventAttendance=" + getRfbEventAttendanceId() +
+            ", rfbLocation=" + getRfbLocationId() +
             "}";
     }
 }

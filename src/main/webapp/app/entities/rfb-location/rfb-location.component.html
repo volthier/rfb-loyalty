@@ -17,7 +17,6 @@
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="locationName"><span>Location Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="runDayOfWeek"><span>Run Day Of Week</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rvbEventId"><span>Rvb Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -26,11 +25,6 @@
                 <td><a [routerLink]="['/rfb-location', rfbLocation.id, 'view' ]">{{rfbLocation.id}}</a></td>
                 <td>{{rfbLocation.locationName}}</td>
                 <td>{{rfbLocation.runDayOfWeek}}</td>
-                <td>
-                    <div *ngIf="rfbLocation.rvbEventId">
-                        <a [routerLink]="['../rfb-event', rfbLocation.rvbEventId , 'view' ]" >{{rfbLocation.rvbEventId}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

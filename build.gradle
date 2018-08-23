@@ -38,6 +38,7 @@ apply plugin: 'propdeps'
 apply plugin: 'com.moowork.node'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
+apply plugin: "net.ltgt.apt-idea"
 
 dependencyManagement {
   imports {
@@ -92,10 +93,17 @@ if (OperatingSystem.current().isWindows()) {
 test {
     exclude '**/CucumberTest*'
 
+    include '**/*UnitTest*'
+    include '**/*IntTest*'
     // uncomment if the tests reports are not generated
     // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
     // ignoreFailures true
     reports.html.enabled = false
+
+    // Limitando memoria JVM
+    minHeapSize = "128m"
+    maxHeapSize = "512m"
+
 }
 
 task testReport(type: TestReport) {
@@ -232,3 +240,22 @@ if (project.hasProperty('nodeInstall')) {
 compileJava.dependsOn processResources
 processResources.dependsOn cleanResources,bootBuildInfo
 bootBuildInfo.mustRunAfter cleanResources
+
+def generatedSources = "$buildDir/generated"
+def generatedOutputDir = file("$generatedSources")
+
+compileJava{
+    doFirst {
+        generatedOutputDir.exists() || generatedOutputDir.mkdirs()
+        options.compilerArgs = [
+                '-s', "${generatedSources}"
+        ]
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        sourceDirs += generatedOutputDir
+    }
+}

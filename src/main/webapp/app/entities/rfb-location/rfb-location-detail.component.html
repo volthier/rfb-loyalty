@@ -13,12 +13,6 @@
                 <dd>
                     <span>{{rfbLocation.runDayOfWeek}}</span>
                 </dd>
-                <dt><span>Rvb Event</span></dt>
-                <dd>
-                    <div *ngIf="rfbLocation.rvbEventId">
-                        <a [routerLink]="['/rfb-event', rfbLocation.rvbEventId, 'view']">{{rfbLocation.rvbEventId}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

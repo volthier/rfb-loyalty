@@ -6,8 +6,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IRfbEvent } from 'app/shared/model/rfb-event.model';
 import { RfbEventService } from './rfb-event.service';
-import { IRfbEventAttendance } from 'app/shared/model/rfb-event-attendance.model';
-import { RfbEventAttendanceService } from 'app/entities/rfb-event-attendance';
+import { IRfbLocation } from 'app/shared/model/rfb-location.model';
+import { RfbLocationService } from 'app/entities/rfb-location';
 
 @Component({
     selector: 'jhi-rfb-event-update',
@@ -17,13 +17,13 @@ export class RfbEventUpdateComponent implements OnInit {
     private _rfbEvent: IRfbEvent;
     isSaving: boolean;
 
-    rfbeventattendances: IRfbEventAttendance[];
+    rfblocations: IRfbLocation[];
     eventDateDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private rfbEventService: RfbEventService,
-        private rfbEventAttendanceService: RfbEventAttendanceService,
+        private rfbLocationService: RfbLocationService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -32,9 +32,9 @@ export class RfbEventUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ rfbEvent }) => {
             this.rfbEvent = rfbEvent;
         });
-        this.rfbEventAttendanceService.query().subscribe(
-            (res: HttpResponse<IRfbEventAttendance[]>) => {
-                this.rfbeventattendances = res.body;
+        this.rfbLocationService.query().subscribe(
+            (res: HttpResponse<IRfbLocation[]>) => {
+                this.rfblocations = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -70,7 +70,7 @@ export class RfbEventUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackRfbEventAttendanceById(index: number, item: IRfbEventAttendance) {
+    trackRfbLocationById(index: number, item: IRfbLocation) {
         return item.id;
     }
     get rfbEvent() {
