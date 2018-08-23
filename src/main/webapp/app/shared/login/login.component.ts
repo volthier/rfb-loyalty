@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
@@ -16,6 +16,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
+    authErrorMsg: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -70,8 +71,9 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     this.router.navigate([redirect]);
                 }
             })
-            .catch(() => {
+            .catch(response => {
                 this.authenticationError = true;
+                this.authErrorMsg = response.error.message;
             });
     }
 
