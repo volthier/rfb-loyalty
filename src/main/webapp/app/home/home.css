@@ -3,7 +3,7 @@ Main page styles
 ========================================================================== */
 
 #rfb-home-intro {
-    background: url('../../content/images/beer-light-foam-mug-goblet.jpg');
+    background: url('../../content/images/beer-light.jpg');
     background-size: contain;
 }
 
@@ -15,7 +15,7 @@ Main page styles
 .events-header {
     font-family: 'Walter Turncoat', cursive;
     margin-top: 18px;
-    color: #ffffff;
+    color: #000000;
     font-size: 18px;
     text-align: center;
     margin-top: 10px;

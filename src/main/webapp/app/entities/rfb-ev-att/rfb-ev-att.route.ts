@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
 import { Observable } from 'rxjs';
-import { RfbEvAtt } from 'app/shared/model/rfb-ev-att.model';
+import { IRfbEvAtt, RfbEvAtt } from 'app/shared/model/rfb-ev-att.model';
 import { RfbEvAttService } from './rfb-ev-att.service';
 import { RfbEvAttComponent } from './rfb-ev-att.component';
 import { RfbEvAttDetailComponent } from './rfb-ev-att-detail.component';
 import { RfbEvAttUpdateComponent } from './rfb-ev-att-update.component';
 import { RfbEvAttDeletePopupComponent } from './rfb-ev-att-delete-dialog.component';
-import { IRfbEvAtt } from 'app/shared/model/rfb-ev-att.model';
 
 @Injectable({ providedIn: 'root' })
 export class RfbEvAttResolve implements Resolve<IRfbEvAtt> {
@@ -29,7 +28,7 @@ export const rfbEvAttRoute: Routes = [
         path: 'rfb-ev-att',
         component: RfbEvAttComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbEvAtts'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +40,7 @@ export const rfbEvAttRoute: Routes = [
             rfbEvAtt: RfbEvAttResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbEvAtts'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +52,7 @@ export const rfbEvAttRoute: Routes = [
             rfbEvAtt: RfbEvAttResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbEvAtts'
         },
         canActivate: [UserRouteAccessService]
@@ -65,7 +64,7 @@ export const rfbEvAttRoute: Routes = [
             rfbEvAtt: RfbEvAttResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbEvAtts'
         },
         canActivate: [UserRouteAccessService]
@@ -80,7 +79,7 @@ export const rfbEvAttPopupRoute: Routes = [
             rfbEvAtt: RfbEvAttResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbEvAtts'
         },
         canActivate: [UserRouteAccessService],

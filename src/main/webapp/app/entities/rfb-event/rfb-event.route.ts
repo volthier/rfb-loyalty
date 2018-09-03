@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable } from 'rxjs';
-import { RfbEvent } from 'app/shared/model/rfb-event.model';
+import { IRfbEvent, RfbEvent } from 'app/shared/model/rfb-event.model';
 import { RfbEventService } from './rfb-event.service';
 import { RfbEventComponent } from './rfb-event.component';
 import { RfbEventDetailComponent } from './rfb-event-detail.component';
 import { RfbEventUpdateComponent } from './rfb-event-update.component';
 import { RfbEventDeletePopupComponent } from './rfb-event-delete-dialog.component';
-import { IRfbEvent } from 'app/shared/model/rfb-event.model';
 
 @Injectable({ providedIn: 'root' })
 export class RfbEventResolve implements Resolve<IRfbEvent> {
@@ -33,7 +32,7 @@ export const rfbEventRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_ORGANIZER'],
             defaultSort: 'id,asc',
             pageTitle: 'RfbEvents'
         },
@@ -46,7 +45,7 @@ export const rfbEventRoute: Routes = [
             rfbEvent: RfbEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_ORGANIZER'],
             pageTitle: 'RfbEvents'
         },
         canActivate: [UserRouteAccessService]
@@ -58,7 +57,7 @@ export const rfbEventRoute: Routes = [
             rfbEvent: RfbEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_ORGANIZER'],
             pageTitle: 'RfbEvents'
         },
         canActivate: [UserRouteAccessService]
@@ -70,7 +69,7 @@ export const rfbEventRoute: Routes = [
             rfbEvent: RfbEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_ORGANIZER'],
             pageTitle: 'RfbEvents'
         },
         canActivate: [UserRouteAccessService]
@@ -85,7 +84,7 @@ export const rfbEventPopupRoute: Routes = [
             rfbEvent: RfbEventResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_ORGANIZER'],
             pageTitle: 'RfbEvents'
         },
         canActivate: [UserRouteAccessService],
