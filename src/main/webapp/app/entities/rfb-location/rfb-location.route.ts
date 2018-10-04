@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable } from 'rxjs';
-import { RfbLocation } from 'app/shared/model/rfb-location.model';
+import { IRfbLocation, RfbLocation } from 'app/shared/model/rfb-location.model';
 import { RfbLocationService } from './rfb-location.service';
 import { RfbLocationComponent } from './rfb-location.component';
 import { RfbLocationDetailComponent } from './rfb-location-detail.component';
 import { RfbLocationUpdateComponent } from './rfb-location-update.component';
 import { RfbLocationDeletePopupComponent } from './rfb-location-delete-dialog.component';
-import { IRfbLocation } from 'app/shared/model/rfb-location.model';
 
 @Injectable({ providedIn: 'root' })
 export class RfbLocationResolve implements Resolve<IRfbLocation> {
@@ -33,7 +32,7 @@ export const rfbLocationRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             defaultSort: 'id,asc',
             pageTitle: 'RfbLocations'
         },
@@ -46,7 +45,7 @@ export const rfbLocationRoute: Routes = [
             rfbLocation: RfbLocationResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbLocations'
         },
         canActivate: [UserRouteAccessService]
@@ -58,7 +57,7 @@ export const rfbLocationRoute: Routes = [
             rfbLocation: RfbLocationResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbLocations'
         },
         canActivate: [UserRouteAccessService]
@@ -70,7 +69,7 @@ export const rfbLocationRoute: Routes = [
             rfbLocation: RfbLocationResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbLocations'
         },
         canActivate: [UserRouteAccessService]
@@ -85,7 +84,7 @@ export const rfbLocationPopupRoute: Routes = [
             rfbLocation: RfbLocationResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'RfbLocations'
         },
         canActivate: [UserRouteAccessService],

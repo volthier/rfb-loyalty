@@ -1,10 +1,10 @@
 package com.rfb.config;
 
-import com.rfb.security.*;
-
+import com.rfb.security.AuthoritiesConstants;
+import com.rfb.security.RfbAjaxAuthenticationFailureHandler;
 import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.security.*;
-
+import io.github.jhipster.security.AjaxAuthenticationSuccessHandler;
+import io.github.jhipster.security.AjaxLogoutSuccessHandler;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,8 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler() {
-        return new AjaxAuthenticationFailureHandler();
+    public RfbAjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler() {
+        return new RfbAjaxAuthenticationFailureHandler();
     }
 
     @Bean
@@ -144,6 +144,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
+            .antMatchers("/api/rfb-events/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.ORGANIZER)
+            .antMatchers("/api/rfb-location/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/rfb-ev-atts/**").hasAnyAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/users/**").hasAnyAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()

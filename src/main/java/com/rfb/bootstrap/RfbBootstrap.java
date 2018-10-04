@@ -18,18 +18,20 @@ public class RfbBootstrap implements CommandLineRunner {
     private final RfbEventRepository rfbEventRepository;
     private final RfbEvAttRepository rfbEvAttRepository;
     private final UserRepository userRepository;
+    private final RfbUserRepository rfbUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
 
     public RfbBootstrap(RfbLocationRepository rfbLocationRepository, RfbEventRepository rfbEventRepository,
                         RfbEvAttRepository rfbEvAttRepository, UserRepository userRepository,
-                        PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+                        PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, RfbUserRepository rfbUserRepository) {
         this.rfbLocationRepository = rfbLocationRepository;
         this.rfbEventRepository = rfbEventRepository;
         this.rfbEvAttRepository = rfbEvAttRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.rfbUserRepository = rfbUserRepository;
     }
 
     @Transactional
@@ -50,17 +52,26 @@ public class RfbBootstrap implements CommandLineRunner {
         user.setEmail("johnny@runningforbrews.com");
         user.setActivated(true);
         // rfbUser.addAuthority(authorityRepository.findOne("ROLE_RUNNER"));
-        //  rfbUser.addAuthority(authorityRepository.findOne("ROLE_ORGANIZER"));
+        // rfbUser.addAuthority(authorityRepository.findOne("ROLE_ORGANIZER"));
         userRepository.save(user);
         //load data
-        RfbLocation asaNorte = getRfbLocation("asa norte", DayOfWeek.MONDAY.getValue());
 
-        //rfbUser.setHomeLocation(aleAndWitch);
-        userRepository.save(user);
+        RfbUser rfbUser = new RfbUser();
+        rfbUser.setUserName("Coisa Mesmo");
+        RfbLocation asaNorte = getRfbLocation("asa norte", DayOfWeek.MONDAY.getValue());
+        rfbUser.setRfbLocation(asaNorte);
+        // rfbUser.setHomeLocation(aleAndWitch);
+        rfbUserRepository.save(rfbUser);
 
         RfbEvent aleEvent = getRfbEvent(asaNorte);
+        rfbEventRepository.save(aleEvent);
 
-        //getRfbEventAttendance(user, aleEvent);
+        getRfbEventAttendance(rfbUser, aleEvent);
+        RfbEvAtt eventAt = new RfbEvAtt();
+        eventAt.setRfbEvent(aleEvent);
+        eventAt.setRfbUser(rfbUser);
+        eventAt.setAttendanceDay(null);
+        rfbEvAttRepository.save(eventAt);
 
         RfbLocation ratc = getRfbLocation("St Pete - Right Around The Corner", DayOfWeek.TUESDAY.getValue());
 
@@ -72,13 +83,13 @@ public class RfbBootstrap implements CommandLineRunner {
 
         RfbEvent stPeteBrewEvent = getRfbEvent(stPeteBrew);
 
-        //   getRfbEventAttendance(user, stPeteBrewEvent);
+        // getRfbEventAttendance(user, stPeteBrewEvent);
 
         RfbLocation yardOfAle = getRfbLocation("St Pete - Yard of Ale", DayOfWeek.THURSDAY.getValue());
 
         RfbEvent yardOfAleEvent = getRfbEvent(yardOfAle);
 
-        //  getRfbEventAttendance(user, yardOfAleEvent);
+        // getRfbEventAttendance(user, yardOfAleEvent);
 
         RfbLocation pourHouse = getRfbLocation("Tampa - Pour House", DayOfWeek.MONDAY.getValue());
         RfbLocation macDintons = getRfbLocation("Tampa - Mac Dintons", DayOfWeek.TUESDAY.getValue());

@@ -2,16 +2,16 @@ package com.rfb;
 
 import com.rfb.config.ApplicationProperties;
 import com.rfb.config.DefaultProfileUtil;
-
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.web.context.request.RequestContextListener;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -81,5 +81,10 @@ public class RfbloyaltyApp {
             hostAddress,
             env.getProperty("server.port"),
             env.getActiveProfiles());
+    }
+
+    @Bean
+    public RequestContextListener requestContextListener() {
+        return new RequestContextListener();
     }
 }

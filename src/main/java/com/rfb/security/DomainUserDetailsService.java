@@ -5,6 +5,7 @@ import com.rfb.repository.UserRepository;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -26,14 +30,26 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public DomainUserDetailsService(UserRepository userRepository) {
+    private HttpServletRequest request;
+
+    private LoginAttemptService loginAttemptService;
+
+    public DomainUserDetailsService(UserRepository userRepository, HttpServletRequest request, LoginAttemptService loginAttemptService) {
         this.userRepository = userRepository;
+        this.request = request;
+        this.loginAttemptService = loginAttemptService;
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
+
+        String ipAddress = getClientIp();
+
+        if(loginAttemptService.isBlocked(ipAddress)) {
+            throw new LockedException("Blocked");
+        }
 
         if (new EmailValidator().isValid(login, null)) {
             Optional<User> userByEmailFromDatabase = userRepository.findOneWithAuthoritiesByEmail(login);
@@ -58,5 +74,13 @@ public class DomainUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getLogin(),
             user.getPassword(),
             grantedAuthorities);
+    }
+
+    private String getClientIp() {
+        String xfheader = request.getHeader("X-Forwarded-For");
+        if(xfheader == null) {
+            return request.getRemoteAddr();
+        }
+        return xfheader.split(".")[0];
     }
 }
