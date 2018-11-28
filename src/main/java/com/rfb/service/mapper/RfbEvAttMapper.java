@@ -11,8 +11,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {RfbUserMapper.class, RfbEventMapper.class})
 public interface RfbEvAttMapper extends EntityMapper<RfbEvAttDTO, RfbEvAtt> {
 
-    @Mapping(source = "rfbUser.id", target = "rfbUserId")
-    @Mapping(source = "rfbEvent.id", target = "rfbEventId")
+    @Mapping(source = "rfbUser", target = "rfbUserId")
+    @Mapping(source = "rfbEvent", target = "rfbEventId")
     RfbEvAttDTO toDto(RfbEvAtt rfbEvAtt);
 
     @Mapping(source = "rfbUserId", target = "rfbUser")
