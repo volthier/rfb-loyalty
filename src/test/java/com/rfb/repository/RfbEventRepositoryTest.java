@@ -18,10 +18,13 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest(classes = {RfbloyaltyApp.class})
 public class RfbEventRepositoryTest extends AbstractRepositoryTest {
 
+    private RfbUserRepository rfbUserRepository;
+
     @Before
     public void setUp() throws Exception {
 
-        RfbBootstrap rfbBootstrap = new RfbBootstrap( rfbLocationRepository, rfbEventRepository, rfbEvAttRepository, userRepository, passwordEncoder, authorityRepository);
+        RfbBootstrap rfbBootstrap = new RfbBootstrap( rfbLocationRepository,
+            rfbEventRepository, rfbEvAttRepository, userRepository, passwordEncoder, authorityRepository, rfbUserRepository);
     }
 
     @Test
